@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MovementControllable
 {
+    [SerializeField] private UnityEvent OnMovementUpdateOrder;
+
     [Header("Links")]
     [SerializeField] private MovementSettings movementSettings;
     private Rigidbody playerRb;
@@ -12,21 +15,32 @@ public class Movement : MovementControllable
     private int currentJumpCount;
     private bool canJump = true;
 
-    [Header("Wall run")]
-    [SerializeField] private LayerMask mask;
-    [SerializeField] private float wallCheckRaycastLength;
-    [SerializeField] private float wallRunSpeedTreshold;
-
-    public bool IsWallRun { get; protected set; } = false;
-    private Vector3 currentWallNormal;
-    public WallSide WallSide { get; protected set; }
-
     [Header("Jump")]
     [SerializeField] private float additionalImpulsFading;
 
     private Vector2 additionalHorizontalImpuls;
-
     public float CurrentSpeed { get; protected set; }
+
+    public void SetCurrentSpeed(float newSpeed)
+    {
+        if (newSpeed < 0) return;
+
+        CurrentSpeed = newSpeed;
+    }
+
+    public void AddCurrentSpeed(float additionalSpeed)
+    {
+        if (CurrentSpeed + additionalSpeed < 0) return;
+
+        CurrentSpeed += additionalSpeed;
+    }
+
+    public void SetCurrentJumpCount(int newJumpCount)
+    {
+        if (newJumpCount < 0) return;
+
+        currentJumpCount = newJumpCount;
+    }
 
     private void Awake()
     {
@@ -37,12 +51,11 @@ public class Movement : MovementControllable
     {
         base.Update();
 
-        currentWallNormal = GetWall();
-        playerRb.useGravity = !IsWallRun;
-
         AdditionalImpulseFading();
 
-        WallRunStateHandle();
+        CurrentSpeed = movementSettings.DefaultSpeed;
+        
+        OnMovementUpdateOrder.Invoke();
     }
 
     protected override bool GroundCheck() =>
@@ -53,45 +66,6 @@ public class Movement : MovementControllable
 
     private void AdditionalImpulseFading() =>
         additionalHorizontalImpuls = Vector2.Lerp(additionalHorizontalImpuls, Vector2.one, additionalImpulsFading * Time.deltaTime);
-
-    private Vector3 GetWall()
-    {
-        Debug.DrawRay(transform.position, transform.right * wallCheckRaycastLength, Color.red);
-        Debug.DrawRay(transform.position, -transform.right * wallCheckRaycastLength, Color.green);
-
-        if (Physics.Raycast(transform.position, transform.right, out RaycastHit rightHit, wallCheckRaycastLength, mask) ^ Physics.Raycast(transform.position, -transform.right, out RaycastHit leftHit, wallCheckRaycastLength, mask))
-        {
-            if (rightHit.collider == null)
-                return leftHit.normal;
-            else
-                return rightHit.normal;
-        }
-
-        return Vector3.zero;
-    }
-
-    private void WallRunStateHandle()
-    {
-        IsWallRun = false;
-        CurrentSpeed = movementSettings.DefaultSpeed;
-        if (currentWallNormal == Vector3.zero) return;
-        if (HorizontalSpeed <= wallRunSpeedTreshold) return;
-        if (IsGrounded) return;
-
-        IsWallRun = true;
-
-        WallRun();
-    }
-
-    private void WallRun()
-    {
-        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, 0, playerRb.linearVelocity.z);
-        CurrentDirection *= movementSettings.WallRunSpeed;
-
-        currentJumpCount = 0;
-
-        CurrentSpeed += movementSettings.WallRunSpeed;
-    }
 
     private void HandleGroundCheck()
     {
@@ -111,14 +85,15 @@ public class Movement : MovementControllable
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, movementSettings.JumpForce, playerRb.linearVelocity.z);
         CurrentDirection = new Vector3(CurrentDirection.x, movementSettings.JumpForce, CurrentDirection.z);
 
-        if (IsWallRun)
-            additionalHorizontalImpuls = new Vector2(movementSettings.WallRunJumpAdditionalImpuls.x, movementSettings.WallRunJumpAdditionalImpuls.y);
-        else
+        //if (IsWallRun)
+        //    additionalHorizontalImpuls = new Vector2(movementSettings.WallRunJumpAdditionalImpuls.x, movementSettings.WallRunJumpAdditionalImpuls.y);
+        //else
             additionalHorizontalImpuls = movementSettings.AdditionalJumpImpuls;
     }
     
     public override void OnMove(Vector2 inputs)
     {
+        print("ass");
         Vector3 moveVector = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
 
         playerRb.linearVelocity = new Vector3(moveVector.x * additionalHorizontalImpuls.x, playerRb.linearVelocity.y, moveVector.z * additionalHorizontalImpuls.x);

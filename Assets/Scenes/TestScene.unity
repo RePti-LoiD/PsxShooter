@@ -1123,6 +1123,7 @@ GameObject:
   - component: {fileID: 1245074768}
   - component: {fileID: 1245074767}
   - component: {fileID: 1245074766}
+  - component: {fileID: 1245074774}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1218,13 +1219,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnMovementUpdateOrder:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1245074774}
+        m_TargetAssemblyTypeName: WallRun, Assembly-CSharp
+        m_MethodName: OnMovementUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   movementSettings: {fileID: 11400000, guid: 09cd13b79668de2469160bd939e1e35c, type: 2}
   groundCheckRaycastLength: 1.1
-  mask:
-    serializedVersion: 2
-    m_Bits: 8
-  wallCheckRaycastLength: 1.5
-  wallRunSpeedTreshold: 5
   additionalImpulsFading: 15
 --- !u!54 &1245074769
 Rigidbody:
@@ -1348,6 +1359,24 @@ Transform:
   - {fileID: 342610260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245074774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245074765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c356451db27e68f4095cac2d5c832dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSettings: {fileID: 11400000, guid: 09cd13b79668de2469160bd939e1e35c, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
+  wallCheckRaycastLength: 0.6
+  wallRunSpeedTreshold: 5
 --- !u!1 &1420703141
 GameObject:
   m_ObjectHideFlags: 0

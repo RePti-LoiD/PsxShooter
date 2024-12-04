@@ -22,35 +22,35 @@ public abstract class MovementControllable : MonoBehaviour
     public bool IsGrounded 
     {
         get => isGrounded;  
-        protected set
+        set
         {
             isGrounded = value;
             OnIsGroundedChanged.Invoke(value);
         }
     }
-    public BoolEvent OnIsGroundedChanged; 
+    [Header("Events")][SerializeField] private BoolEvent OnIsGroundedChanged; 
     
     private float horizontalSpeed;
     public float HorizontalSpeed 
     {
         get => horizontalSpeed; 
-        protected set
+        set
         {
             horizontalSpeed = value;
             OnHorizonalSpeedChanged.Invoke(value);
         }
     }
-    public UnityEvent<float> OnHorizonalSpeedChanged;
+    [SerializeField] private UnityEvent<float> OnHorizonalSpeedChanged;
 
     private Vector3 currentDirection;
     public Vector3 CurrentDirection 
     {
         get => currentDirection; 
-        protected set
+        set
         {
             currentDirection = value;
             OnCurrentDirectionChanged.Invoke(value);
         }
     }
-    public Vector3Event OnCurrentDirectionChanged;
+    [SerializeField] private Vector3Event OnCurrentDirectionChanged;
 }

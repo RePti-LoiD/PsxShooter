@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebdf0fdf3aedbfb4281c529c86c42235, type: 3}
+  m_Script: {fileID: 11500000, guid: 01e3e3133af659345b1ab682406feeb3, type: 3}
   m_Name: Movement Settings
   m_EditorClassIdentifier: 
   defaultSpeed: 12
@@ -18,7 +18,7 @@ MonoBehaviour:
   jumpCount: 2
   crouchSpeed: 2
   onFlyCrouchVelocitySpeed: 25
-  wallRunSpeed: 14
+  wallRunSpeed: 13
   dashSpeed: 20
   wallRunJumpAdditionalImpuls: {x: 10, y: 20}
   sensitivity: 0.05
