@@ -18,7 +18,7 @@ public class Movement : MovementControllable
     [Header("Jump")]
     [SerializeField] private float additionalImpulsFading;
 
-    private Vector2 additionalHorizontalImpuls;
+    private Vector3 additionalHorizontalImpuls;
     public float CurrentSpeed { get; protected set; }
 
     public void SetCurrentSpeed(float newSpeed)
@@ -42,7 +42,7 @@ public class Movement : MovementControllable
         currentJumpCount = newJumpCount;
     }
 
-    public void SetAdditionalHorizonalImpulse(Vector2 newHorizonalImpluls) =>
+    public void SetAdditionalHorizonalImpulse(Vector3 newHorizonalImpluls) =>
         additionalHorizontalImpuls = newHorizonalImpluls;
 
     private void Awake()
@@ -53,6 +53,7 @@ public class Movement : MovementControllable
     protected override void Update()
     {
         base.Update();
+        print(additionalHorizontalImpuls);
 
         AdditionalImpulseFading();
 
@@ -68,7 +69,7 @@ public class Movement : MovementControllable
         Mathf.Sqrt(Mathf.Pow(playerRb.linearVelocity.x, 2) + Mathf.Pow(playerRb.linearVelocity.z, 2));
 
     private void AdditionalImpulseFading() =>
-        additionalHorizontalImpuls = Vector2.Lerp(additionalHorizontalImpuls, Vector2.one, additionalImpulsFading * Time.deltaTime);
+        additionalHorizontalImpuls = Vector2.Lerp(additionalHorizontalImpuls, new Vector2(1, 0), additionalImpulsFading * Time.deltaTime);
 
     private void HandleGroundCheck()
     {

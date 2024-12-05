@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CanvasMover : MonoBehaviour
 {
+    [SerializeField] private Vector2 clampVector;
     [SerializeField] private float speed;
     [SerializeField] private int ShiftVelocityDivider = 500;
 
@@ -16,6 +17,6 @@ public class CanvasMover : MonoBehaviour
         transform.localPosition = Vector3.Lerp(
                 transform.localPosition + (new Vector3(currentDirection.x, 0, currentDirection.z) / ShiftVelocityDivider), 
                 defaultPosition, 
-                Time.deltaTime * speed
-            );
+                Time.deltaTime * speed)
+            .Clamp(new Vector3(clampVector.x, 0, clampVector.y));
 }

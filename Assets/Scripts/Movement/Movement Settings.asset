@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 12
   jumpForce: 5
-  additionalJumpImpuls: {x: 5, y: 5}
-  jumpCount: 2
+  additionalJumpImpuls: {x: 5, y: 0}
+  jumpCount: 3
   crouchSpeed: 2
   onFlyCrouchVelocitySpeed: 25
   wallRunSpeed: 13
   dashSpeed: 20
-  wallRunJumpAdditionalImpuls: {x: 15, y: 30}
+  wallRunJumpAdditionalImpuls: {x: 15, y: 0}
   sensitivity: 0.05
