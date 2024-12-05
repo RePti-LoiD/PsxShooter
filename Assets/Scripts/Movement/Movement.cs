@@ -88,15 +88,11 @@ public class Movement : MovementControllable
         playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, movementSettings.JumpForce, playerRb.linearVelocity.z);
         CurrentDirection = new Vector3(CurrentDirection.x, movementSettings.JumpForce, CurrentDirection.z);
 
-        //if (IsWallRun)
-        //    additionalHorizontalImpuls = new Vector2(movementSettings.WallRunJumpAdditionalImpuls.x, movementSettings.WallRunJumpAdditionalImpuls.y);
-        //else
-            additionalHorizontalImpuls = movementSettings.AdditionalJumpImpuls;
+        additionalHorizontalImpuls = movementSettings.AdditionalJumpImpuls;
     }
     
     public override void OnMove(Vector2 inputs)
     {
-        print("ass");
         Vector3 moveVector = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
 
         playerRb.linearVelocity = new Vector3(moveVector.x * additionalHorizontalImpuls.x, playerRb.linearVelocity.y, moveVector.z * additionalHorizontalImpuls.x);

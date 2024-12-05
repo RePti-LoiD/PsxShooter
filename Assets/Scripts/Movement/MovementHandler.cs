@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MovementHandler : MonoBehaviour
 {
-    [SerializeField] private MovementControllable movementControllable;
-    [SerializeField] private MouseMovementControllable mouseMovementControllable;
+    [SerializeField] private UnityEvent OnJump;
+    [SerializeField] private UnityEvent OnDash;
+    [SerializeField] private UnityEvent OnCrouch;
+    [SerializeField] private Vector2Event OnMouseMove;
+    [SerializeField] private Vector2Event OnMove;
+
     private PlayerInputs inputs;
 
     private bool isInputEnabled;
@@ -16,9 +21,9 @@ public class MovementHandler : MonoBehaviour
     private void OnEnable()
     {
         inputs.Enable();
-        inputs.PlayerMap.Jump.performed += OnJump;
-        inputs.PlayerMap.Dash.performed += OnDash;
-        inputs.PlayerMap.Crouch.performed += OnCrouch;
+        inputs.PlayerMap.Jump.performed += JumpHandler;
+        inputs.PlayerMap.Dash.performed += DashHandler;
+        inputs.PlayerMap.Crouch.performed += CrouchHandler;
         
         isInputEnabled = true;
     }
@@ -27,9 +32,9 @@ public class MovementHandler : MonoBehaviour
     private void OnDisable()
     {
         inputs.Disable();
-        inputs.PlayerMap.Jump.performed -= OnJump;
-        inputs.PlayerMap.Dash.performed -= OnDash;
-        inputs.PlayerMap.Crouch.performed -= OnCrouch;
+        inputs.PlayerMap.Jump.performed -= JumpHandler;
+        inputs.PlayerMap.Dash.performed -= DashHandler;
+        inputs.PlayerMap.Crouch.performed -= CrouchHandler;
         
         isInputEnabled = false;
     }
@@ -42,16 +47,19 @@ public class MovementHandler : MonoBehaviour
         HandleCameraMovement();
     }
 
-    private void OnJump(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
-        movementControllable.OnJump();
+    private void JumpHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+        OnJump.Invoke();
+    
+    private void DashHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+        OnDash.Invoke();
+    
+    private void CrouchHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+        OnCrouch.Invoke();
+    
     private void HandleMovement() =>
-        movementControllable.OnMove(inputs.PlayerMap.Move.ReadValue<Vector2>());
+        OnMove.Invoke(inputs.PlayerMap.Move.ReadValue<Vector2>());
 
     private void HandleCameraMovement() =>
-        mouseMovementControllable.OnCameraMove(inputs.PlayerMap.MouseMove.ReadValue<Vector2>());
+        OnMouseMove.Invoke(inputs.PlayerMap.MouseMove.ReadValue<Vector2>());
 
-    private void OnDash(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
-        movementControllable.OnDash();
-    private void OnCrouch(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
-        movementControllable.OnCrouch();
 }

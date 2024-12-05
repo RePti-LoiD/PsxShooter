@@ -20,5 +20,5 @@ MonoBehaviour:
   onFlyCrouchVelocitySpeed: 25
   wallRunSpeed: 13
   dashSpeed: 20
-  wallRunJumpAdditionalImpuls: {x: 10, y: 20}
+  wallRunJumpAdditionalImpuls: {x: 15, y: 30}
   sensitivity: 0.05
