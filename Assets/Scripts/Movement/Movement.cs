@@ -42,6 +42,9 @@ public class Movement : MovementControllable
         currentJumpCount = newJumpCount;
     }
 
+    public void SetAdditionalHorizonalImpulse(Vector2 newHorizonalImpluls) =>
+        additionalHorizontalImpuls = newHorizonalImpluls;
+
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();

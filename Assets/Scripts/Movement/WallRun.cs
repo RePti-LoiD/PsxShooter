@@ -68,4 +68,9 @@ public class WallRun : MonoBehaviour
         movement.SetCurrentJumpCount(0);
         movement.AddCurrentSpeed(movementSettings.WallRunSpeed);
     }
+
+    public void OnJump()
+    {
+        //TODO
+    }
 }
