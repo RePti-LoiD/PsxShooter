@@ -53,7 +53,7 @@ public class Movement : MovementControllable
     protected override void Update()
     {
         base.Update();
-        print(additionalHorizontalImpuls);
+        print(HorizontalSpeed);
 
         AdditionalImpulseFading();
 
