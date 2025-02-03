@@ -868,6 +868,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610091658}
+  - component: {fileID: 610091660}
+  - component: {fileID: 610091659}
   m_Layer: 7
   m_Name: WeaponPlace
   m_TagString: Untagged
@@ -884,13 +886,50 @@ Transform:
   m_GameObject: {fileID: 610091657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.018, y: 0, z: 0.056}
+  m_LocalPosition: {x: 0.156, y: -0.315, z: 0.419}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 935258232}
   m_Father: {fileID: 243589702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610091659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610091657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8805241daff492d43b198030b1d8d40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantTransform: {fileID: 610091660}
+  amount: 0.005
+  maxAmount: 0.01
+  smoothAmount: 8
+  rotationAmount: 1
+  maxRotationAmount: 2
+  smoothRotation: 8
+  AxisX: 1
+  AxisY: 1
+  AxisZ: 1
+  zAxisMultiplier: 1
+--- !u!114 &610091660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610091657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39cd8dc6deb4c240aa43601be2a984d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantPosition: {x: 0.156, y: -0.315, z: 0.419}
+  instantRotation: {x: 0, y: 0, z: 0}
 --- !u!4 &705437316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6085024423062786171, guid: 983718c21ed0779448ac40e301385f56,
@@ -1314,6 +1353,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 610091659}
+        m_TargetAssemblyTypeName: WeaponBehaviour.WeaponSway, Assembly-CSharp
+        m_MethodName: OnMouseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnMove:
     m_PersistentCalls:
       m_Calls:
@@ -1329,6 +1380,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnShot:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReload:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAdditionalAction:
+    m_PersistentCalls:
+      m_Calls: []
+  OnInspect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1245074767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,7 +1407,7 @@ MonoBehaviour:
   movementSettings: {fileID: 11400000, guid: 09cd13b79668de2469160bd939e1e35c, type: 2}
   playerRb: {fileID: 1245074769}
   maxVerticalCameraAngle: 90
-  zTiltCenterSpeed: 50
+  zTiltCenterSpeed: 25
   maxZTilt: 15
 --- !u!114 &1245074768
 MonoBehaviour:
@@ -1360,10 +1423,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnIsGroundedChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610091657}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHorizonalSpeedChanged:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 705437317}
+        m_TargetAssemblyTypeName: SpeedParticleController, Assembly-CSharp
+        m_MethodName: ForceDisableParticleSystem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 243589703}
         m_TargetAssemblyTypeName: CameraFovSpeedController, Assembly-CSharp
         m_MethodName: HorizontalSpeedChagedHandler
@@ -1388,10 +1475,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 705437317}
+      - m_Target: {fileID: 610091657}
         m_TargetAssemblyTypeName: SpeedParticleController, Assembly-CSharp
-        m_MethodName: ForceDisableParticleSystem
-        m_Mode: 0
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1415,7 +1502,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnMovementUpdateOrder:
+  OnMovementUpdate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1245074774}
@@ -2560,52 +2647,52 @@ PrefabInstance:
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2714
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.32114422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3609
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.01032175
+      value: 0.013643695
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.11797809
+      value: -0.12981121
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.989184
+      value: 0.98601365
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.08654244
+      value: 0.10363412
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -9.717
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 182.375
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5882897389407780806, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -13.805
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 6552615056138921340, guid: f3fd12b60e4f2894580e2e6baedf178c,
         type: 3}
@@ -2640,11 +2727,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1812951729}
     m_Modifications:
-    - target: {fileID: 5151958481429913827, guid: 983718c21ed0779448ac40e301385f56,
-        type: 3}
-      propertyPath: minMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6085024423062786171, guid: 983718c21ed0779448ac40e301385f56,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2699,6 +2781,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpeedEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574524671021143230, guid: 983718c21ed0779448ac40e301385f56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

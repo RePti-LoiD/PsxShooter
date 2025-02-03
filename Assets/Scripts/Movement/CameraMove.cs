@@ -31,6 +31,7 @@ public class CameraMove : MouseMovementControllable
 
         zTilt = Mathf.Clamp(zTilt - mouseInputs.x, -maxZTilt, maxZTilt);
         zTilt = Mathf.Lerp(zTilt, 0, Time.deltaTime * zTiltCenterSpeed);
+
         cameraTransform.localRotation = Quaternion.Euler(new Vector3(-currentRotation.y, 0f, zTilt));
     }
 }

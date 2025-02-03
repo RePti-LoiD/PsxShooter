@@ -4,7 +4,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MovementControllable
 {
-    [SerializeField] private UnityEvent OnMovementUpdateOrder;
+    [SerializeField] private UnityEvent OnMovementUpdate;
 
     [Header("Links")]
     [SerializeField] private MovementSettings movementSettings;
@@ -53,13 +53,12 @@ public class Movement : MovementControllable
     protected override void Update()
     {
         base.Update();
-        print(HorizontalSpeed);
 
         AdditionalImpulseFading();
 
         CurrentSpeed = movementSettings.DefaultSpeed;
         
-        OnMovementUpdateOrder.Invoke();
+        OnMovementUpdate.Invoke();
     }
 
     protected override bool GroundCheck() =>

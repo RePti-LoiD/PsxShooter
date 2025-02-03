@@ -3,11 +3,20 @@ using UnityEngine.Events;
 
 public class MovementHandler : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private UnityEvent OnJump;
     [SerializeField] private UnityEvent OnDash;
     [SerializeField] private UnityEvent OnCrouch;
+
+    [Header("Mouse")]
     [SerializeField] private Vector2Event OnMouseMove;
     [SerializeField] private Vector2Event OnMove;
+
+    [Header("Gun")]
+    [SerializeField] private UnityEvent OnShot;
+    [SerializeField] private UnityEvent OnReload;
+    [SerializeField] private UnityEvent OnAdditionalAction;
+    [SerializeField] private UnityEvent OnInspect;
 
     private PlayerInputs inputs;
 
