@@ -4,7 +4,7 @@ public class CanvasMover : MonoBehaviour
 {
     [SerializeField] private Vector2 clampVector;
     [SerializeField] private float speed;
-    [SerializeField] private int ShiftVelocityDivider = 500;
+    [SerializeField] private float ShiftVelocityDivider = 500;
 
     private Vector3 defaultPosition;
 

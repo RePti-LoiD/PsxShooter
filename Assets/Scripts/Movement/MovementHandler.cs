@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class MovementHandler : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class MovementHandler : MonoBehaviour
     [SerializeField] private Vector2Event OnMove;
 
     [Header("Gun")]
-    [SerializeField] private UnityEvent OnShot;
+    [SerializeField] private UnityEvent OnShotStart;
+    [SerializeField] private UnityEvent OnShotStop;
+
     [SerializeField] private UnityEvent OnReload;
     [SerializeField] private UnityEvent OnAdditionalAction;
     [SerializeField] private UnityEvent OnInspect;
@@ -33,10 +36,16 @@ public class MovementHandler : MonoBehaviour
         inputs.PlayerMap.Jump.performed += JumpHandler;
         inputs.PlayerMap.Dash.performed += DashHandler;
         inputs.PlayerMap.Crouch.performed += CrouchHandler;
-        
+
+        inputs.PlayerMap.Shot.started += ShotStartHandler;
+        inputs.PlayerMap.Shot.canceled += ShotStopHandler;
+
+        inputs.PlayerMap.Reload.performed += ReloadHandler;
+        inputs.PlayerMap.Inspect.performed += InspectHandler;
+        inputs.PlayerMap.OnAdditionalAction.performed += AdditionalActionHandler;
+
         isInputEnabled = true;
     }
-
 
     private void OnDisable()
     {
@@ -44,7 +53,14 @@ public class MovementHandler : MonoBehaviour
         inputs.PlayerMap.Jump.performed -= JumpHandler;
         inputs.PlayerMap.Dash.performed -= DashHandler;
         inputs.PlayerMap.Crouch.performed -= CrouchHandler;
-        
+
+        inputs.PlayerMap.Shot.started -= ShotStartHandler;
+        inputs.PlayerMap.Shot.canceled -= ShotStopHandler;
+
+        inputs.PlayerMap.Reload.performed -= ReloadHandler;
+        inputs.PlayerMap.Inspect.performed -= InspectHandler;
+        inputs.PlayerMap.OnAdditionalAction.performed -= AdditionalActionHandler;
+
         isInputEnabled = false;
     }
 
@@ -56,19 +72,40 @@ public class MovementHandler : MonoBehaviour
         HandleCameraMovement();
     }
 
-    private void JumpHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+    #region Movement
+    private void JumpHandler(InputAction.CallbackContext obj) =>
         OnJump.Invoke();
     
-    private void DashHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+    private void DashHandler(InputAction.CallbackContext obj) =>
         OnDash.Invoke();
     
-    private void CrouchHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj) =>
+    private void CrouchHandler(InputAction.CallbackContext obj) =>
         OnCrouch.Invoke();
-    
+    #endregion
+
+
+    #region Mouse
     private void HandleMovement() =>
         OnMove.Invoke(inputs.PlayerMap.Move.ReadValue<Vector2>());
 
     private void HandleCameraMovement() =>
         OnMouseMove.Invoke(inputs.PlayerMap.MouseMove.ReadValue<Vector2>());
+    #endregion
 
+
+    #region Weapon
+    private void ShotStartHandler(InputAction.CallbackContext context) =>
+        OnShotStart?.Invoke();
+    private void ShotStopHandler(InputAction.CallbackContext context) =>
+        OnShotStop?.Invoke();
+
+    private void ReloadHandler(InputAction.CallbackContext obj) =>
+        OnReload?.Invoke();
+
+    private void InspectHandler(InputAction.CallbackContext obj) =>
+        OnInspect?.Invoke();
+
+    private void AdditionalActionHandler(InputAction.CallbackContext obj) =>
+        OnAdditionalAction?.Invoke();
+    #endregion
 }

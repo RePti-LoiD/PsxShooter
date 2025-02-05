@@ -51,9 +51,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Shot",
                     "type": "Button",
                     "id": "b7de751a-b7df-4683-af7a-74aabfc27f8d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "cc929ce4-02a5-45d4-af29-0b7d6a79b417",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OnAdditionalAction",
+                    "type": "Button",
+                    "id": "346633a3-bc94-428d-a53e-b87b364f7aec",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inspect",
+                    "type": "Button",
+                    "id": "94bd4d61-ac61-41d0-ad3d-7dc08a4c232d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -222,7 +249,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
-                    "action": "Shoot",
+                    "action": "Shot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b17e100-e687-4e08-ae1e-e036c7397c74",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1edd093-4c90-4b91-80d0-7888005d005e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "OnAdditionalAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71538e5d-1336-4424-9638-59a3b96286d8",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "Inspect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

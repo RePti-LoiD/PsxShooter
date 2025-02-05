@@ -13,7 +13,6 @@ namespace WeaponBehaviour
 
         [Header("Rotation")]
         [SerializeField] private float rotationAmount = 4f;
-        [SerializeField] private float maxRotationAmount = 5f;
 
         [SerializeField] private float smoothRotation = 12f;
 
@@ -22,8 +21,6 @@ namespace WeaponBehaviour
         [SerializeField] private bool AxisX = true;
         [SerializeField] private bool AxisY = true;
         [SerializeField] private bool AxisZ = true;
-
-        [SerializeField] private float zAxisMultiplier = 5f;
 
         private Vector2 mouseInputs;
 
