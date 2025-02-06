@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class Movement : MovementControllable
 {
     [SerializeField] private UnityEvent OnMovementUpdate;
+    [SerializeField] private Vector3Event OnLinearVelocityChanged;
+    [Space]
 
     [Header("Links")]
     [SerializeField] private MovementSettings movementSettings;
@@ -18,8 +20,11 @@ public class Movement : MovementControllable
     [Header("Jump")]
     [SerializeField] private float additionalImpulsFading;
 
+
     private Vector3 additionalHorizontalImpuls;
     public float CurrentSpeed { get; protected set; }
+
+    private Vector3 moveVector;
 
     public void SetCurrentSpeed(float newSpeed)
     {
@@ -59,6 +64,7 @@ public class Movement : MovementControllable
         CurrentSpeed = movementSettings.DefaultSpeed;
         
         OnMovementUpdate.Invoke();
+        OnLinearVelocityChanged.Invoke(playerRb.linearVelocity);
     }
 
     protected override bool GroundCheck() =>
@@ -93,7 +99,12 @@ public class Movement : MovementControllable
     
     public override void OnMove(Vector2 inputs)
     {
-        Vector3 moveVector = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
+        var transformedInput = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
+        
+        if (movementSettings.KeyboardLerpEnabled)
+            moveVector = Vector3.Lerp(moveVector, transformedInput, Time.deltaTime * movementSettings.KeyboardLerpValue);
+        else 
+            moveVector = transformedInput;
 
         playerRb.linearVelocity = new Vector3(moveVector.x * additionalHorizontalImpuls.x, playerRb.linearVelocity.y, moveVector.z * additionalHorizontalImpuls.x);
         CurrentDirection = new Vector3(inputs.x, CurrentDirection.y, inputs.y);

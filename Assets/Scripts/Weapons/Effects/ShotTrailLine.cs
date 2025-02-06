@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class ShotTrailLine : MonoBehaviour
@@ -7,13 +8,13 @@ public class ShotTrailLine : MonoBehaviour
     [SerializeField] private GameObject trailRendererPrefab;
     [SerializeField] private float lineLifetime;
 
-    public void DrawTrail(Vector3 trailTarget)
+    public void DrawTrail(Vector3[] trailTarget)
     {
         var trailObj = Instantiate(trailRendererPrefab, Vector3.zero, Quaternion.identity, null);
-
         var line = trailObj.GetComponent<LineRenderer>();
-        line.positionCount = 2;
-        line.SetPositions(new Vector3[] { trailOrigin.position, trailTarget });
+        line.positionCount = trailTarget.Length + 1;
+         
+        line.SetPositions(new Vector3[] { trailOrigin.position }.Concat(trailTarget).ToArray());
 
         StartCoroutine(DestroyLineAfter(trailObj, lineLifetime));
     }

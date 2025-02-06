@@ -40,7 +40,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""9e7d9681-b2d0-48d8-8253-26f8b75caec2"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -73,7 +73,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""OnShot"",
+                    ""name"": ""Shot"",
                     ""type"": ""Button"",
                     ""id"": ""b7de751a-b7df-4683-af7a-74aabfc27f8d"",
                     ""expectedControlType"": """",
@@ -91,7 +91,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AdditionalActionHandler"",
+                    ""name"": ""OnAdditionalAction"",
                     ""type"": ""Button"",
                     ""id"": ""346633a3-bc94-428d-a53e-b87b364f7aec"",
                     ""expectedControlType"": """",
@@ -113,7 +113,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""289fe6d9-e70e-4602-8048-62ea1ea10f8a"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -271,7 +271,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""OnShot"",
+                    ""action"": ""Shot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -293,7 +293,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""AdditionalActionHandler"",
+                    ""action"": ""OnAdditionalAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -348,9 +348,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_PlayerMap_MouseMove = m_PlayerMap.FindAction("MouseMove", throwIfNotFound: true);
         m_PlayerMap_Dash = m_PlayerMap.FindAction("Dash", throwIfNotFound: true);
         m_PlayerMap_Crouch = m_PlayerMap.FindAction("Crouch", throwIfNotFound: true);
-        m_PlayerMap_Shot = m_PlayerMap.FindAction("OnShot", throwIfNotFound: true);
+        m_PlayerMap_Shot = m_PlayerMap.FindAction("Shot", throwIfNotFound: true);
         m_PlayerMap_Reload = m_PlayerMap.FindAction("Reload", throwIfNotFound: true);
-        m_PlayerMap_OnAdditionalAction = m_PlayerMap.FindAction("AdditionalActionHandler", throwIfNotFound: true);
+        m_PlayerMap_OnAdditionalAction = m_PlayerMap.FindAction("OnAdditionalAction", throwIfNotFound: true);
         m_PlayerMap_Inspect = m_PlayerMap.FindAction("Inspect", throwIfNotFound: true);
     }
 

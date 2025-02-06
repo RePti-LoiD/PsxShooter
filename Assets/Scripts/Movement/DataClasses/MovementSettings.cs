@@ -3,6 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Create movement settings asset")]
 class MovementSettings : ScriptableObject
 {
+    [Header("Input")]
+    [SerializeField] private float keyboardLerpValue;
+    [SerializeField] private bool keyboardLerpEnabled;
+    
+    [Header("Camera movement")]
+    [SerializeField] private float sensitivity = 1f;
+
+    [Space]
+    [Space]
     [Header("Body movement")]
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float jumpForce;
@@ -17,9 +26,9 @@ class MovementSettings : ScriptableObject
     [SerializeField] private float wallRunSpeed;
     [SerializeField] private float dashSpeed;
     [SerializeField] private Vector2 wallRunJumpAdditionalImpuls;
-
-    [Header("Camera movement")]
-    [SerializeField] private float sensitivity = 1f;
+    
+    public bool KeyboardLerpEnabled { get => keyboardLerpEnabled; set => keyboardLerpEnabled = value; }
+    public float KeyboardLerpValue { get => keyboardLerpValue; set => keyboardLerpValue = value; }
 
     public float DefaultSpeed { get => defaultSpeed; set => defaultSpeed = value; }
     public float DashSpeed { get => dashSpeed; set => dashSpeed = value; }

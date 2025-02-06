@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public abstract class MovementControllable : MonoBehaviour
 {
-    public abstract void OnMove(Vector2 dircetion);
+    public abstract void OnMove(Vector2 direction);
     public abstract void OnDash();
     public abstract void OnJump();
     public abstract void OnCrouch();

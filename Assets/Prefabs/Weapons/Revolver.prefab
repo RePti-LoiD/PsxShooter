@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1076443318560394972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4402306921108126728}
+  m_Layer: 7
+  m_Name: CoinSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4402306921108126728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076443318560394972}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5764021, y: 0.78841436, z: 0.20678623, w: -0.058333546}
+  m_LocalPosition: {x: 1, y: 0.5, z: -0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5010297826989285207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7282042883120030003
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +267,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9497843567788932}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 14500c272cac18649a3331d7e6fcec3d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4402306921108126728}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
         type: 3}
@@ -257,6 +292,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1475987452985690432}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3671574213965140765}
   m_SourcePrefab: {fileID: 100100000, guid: 14500c272cac18649a3331d7e6fcec3d, type: 3}
 --- !u!4 &5010297826989285207 stripped
 Transform:
@@ -321,6 +360,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RecoilRotation, Assembly-CSharp
+        m_MethodName: OnShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   fireRatePerMinute: 20
 --- !u!114 &3184498514319946177
 MonoBehaviour:
@@ -336,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotType: {fileID: 2854906597228959035}
   damage: 20
+  minRicochetAngle: 60
   OnShotTargetTransform:
     m_PersistentCalls:
       m_Calls:
@@ -363,9 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7368e29884d639d49b71c850f406e0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHipfireRecoil: {x: -0.08, y: -0.15, z: 0.4}
-  hipfireRecoil: {x: -0.12, y: -0.2, z: 0.3}
-  returnTime: 20
+  targetHipfireRecoil: {x: 0.25, y: -0.15, z: 0.4}
+  hipfireRecoil: {x: -0.25, y: -0.2, z: 0.3}
+  returnTime: 12
   snappines: 7
 --- !u!114 &2595832345059723197
 MonoBehaviour:
@@ -379,8 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b851f9740dd23fb45b253c2527e96a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHipfireRecoil: {x: 60, y: 15, z: 5}
-  hipfireRecoil: {x: 40, y: -10, z: 40}
+  targetHipfireRecoil: {x: 70, y: 15, z: 5}
+  hipfireRecoil: {x: 60, y: -10, z: 40}
   returnTime: 7
   snappines: 7
 --- !u!114 &1475987452985690432
@@ -399,3 +451,21 @@ MonoBehaviour:
   trailRendererPrefab: {fileID: 3902428475139715204, guid: bc2ae2a84962e124a8a0f52193ebdcc8,
     type: 3}
   lineLifetime: 0.5
+--- !u!114 &3671574213965140765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675652631854040557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b0986f023116b4d85a42f03f3bfc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 736767104670737029, guid: 9891842e1a4c6d34fbacb2a1f788221d,
+    type: 3}
+  coinSpawnPoint: {fileID: 4402306921108126728}
+  coinLifetime: 1.5
+  coinAddForceMultiplier: 300
+  coinlinearVeloityMultiplier: 0.4

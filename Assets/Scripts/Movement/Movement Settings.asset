@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e3e3133af659345b1ab682406feeb3, type: 3}
   m_Name: Movement Settings
   m_EditorClassIdentifier: 
+  keyboardLerpValue: 5
+  keyboardLerpEnabled: 1
+  sensitivity: 0.05
   defaultSpeed: 12
   jumpForce: 5
   additionalJumpImpuls: {x: 5, y: 0}
@@ -21,4 +24,3 @@ MonoBehaviour:
   wallRunSpeed: 13
   dashSpeed: 20
   wallRunJumpAdditionalImpuls: {x: 15, y: 0}
-  sensitivity: 0.05

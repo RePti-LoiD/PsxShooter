@@ -18,7 +18,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "9e7d9681-b2d0-48d8-8253-26f8b75caec2",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -91,7 +91,7 @@
                 {
                     "name": "2D Vector",
                     "id": "289fe6d9-e70e-4602-8048-62ea1ea10f8a",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
