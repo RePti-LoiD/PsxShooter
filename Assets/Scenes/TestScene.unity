@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampVector: {x: 50, y: 50}
   speed: 10
-  ShiftVelocityDivider: 0.5
+  ShiftVelocityDivider: -0.5
 --- !u!1 &454169047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1058,7 @@ GameObject:
   - component: {fileID: 610091658}
   - component: {fileID: 610091660}
   - component: {fileID: 610091659}
+  - component: {fileID: 610091661}
   m_Layer: 7
   m_Name: WeaponPlace
   m_TagString: Untagged
@@ -1088,7 +1089,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610091657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8805241daff492d43b198030b1d8d40c, type: 3}
   m_Name: 
@@ -1116,6 +1117,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantPosition: {x: 0, y: 0, z: 0}
   instantRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &610091661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610091657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b39935bafeace04d8ab0b24f90d6dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.04
+  shakeFreq: 6.5
+  inputWeight: 0.05
+  lerpValue: 9
 --- !u!4 &705437316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6085024423062786171, guid: 983718c21ed0779448ac40e301385f56,
@@ -1556,6 +1573,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1245074768}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 610091661}
+        m_TargetAssemblyTypeName: WeaponShake, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
