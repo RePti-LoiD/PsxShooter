@@ -8,8 +8,6 @@ public class CameraMove : MouseMovementControllable
     [SerializeField] private float zTiltCenterSpeed;
     [SerializeField] private int maxZTilt;
 
-    [SerializeField] private bool disableZTilt = false;
-
     [SerializeField] private Transform cameraTransform;
     private Vector2 currentRotation;
 
@@ -29,13 +27,13 @@ public class CameraMove : MouseMovementControllable
 
         playerRb.MoveRotation(Quaternion.Euler(new Vector3(0, currentRotation.x, 0)));
         
-        if (!disableZTilt)
-            CalcilateZTilt(mouseInputs);
+        if (movementSettings.ZTiltCameraEnabled)
+            CalculateZTilt(mouseInputs);
 
         cameraTransform.localRotation = Quaternion.Euler(new Vector3(-currentRotation.y, 0f, zTilt));
     }
 
-    private void CalcilateZTilt(Vector2 mouseInputs)
+    private void CalculateZTilt(Vector2 mouseInputs)
     {
         zTilt = Mathf.Clamp(zTilt - mouseInputs.x, -maxZTilt, maxZTilt);
         zTilt = Mathf.Lerp(zTilt, 0, Time.deltaTime * zTiltCenterSpeed);

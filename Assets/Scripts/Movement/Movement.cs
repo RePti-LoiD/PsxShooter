@@ -25,6 +25,7 @@ public class Movement : MovementControllable
     public float CurrentSpeed { get; protected set; }
 
     private Vector3 moveVector;
+    private float currentLerpValue;
 
     public void SetCurrentSpeed(float newSpeed)
     {
@@ -85,6 +86,14 @@ public class Movement : MovementControllable
         else canJump = false;
     }
 
+    public void IsGroundedChanged(bool isGrounded)
+    {
+        if (isGrounded)
+            currentLerpValue = movementSettings.GroundKeyboardLerpValue;
+        else
+            currentLerpValue = movementSettings.AirKeyboardLerpValue;
+    }
+
     public override void OnJump()
     {
         HandleGroundCheck();
@@ -102,7 +111,7 @@ public class Movement : MovementControllable
         var transformedInput = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
         
         if (movementSettings.KeyboardLerpEnabled)
-            moveVector = Vector3.Lerp(moveVector, transformedInput, Time.deltaTime * movementSettings.KeyboardLerpValue);
+            moveVector = Vector3.Lerp(moveVector, transformedInput, Time.deltaTime * currentLerpValue);
         else 
             moveVector = transformedInput;
 

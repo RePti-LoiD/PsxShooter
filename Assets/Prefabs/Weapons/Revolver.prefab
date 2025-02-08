@@ -287,7 +287,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5043302488638782024}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2595832345059723197}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5968075816158862432}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 14500c272cac18649a3331d7e6fcec3d,
         type: 3}
       insertIndex: -1
@@ -348,9 +356,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2595832345059723197}
-        m_TargetAssemblyTypeName: RecoilRotation, Assembly-CSharp
-        m_MethodName: OnShot
+      - m_Target: {fileID: 5043302488638782024}
+        m_TargetAssemblyTypeName: RecoilRotationSender, Assembly-CSharp
+        m_MethodName: SendRotation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -360,9 +368,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RecoilRotation, Assembly-CSharp
-        m_MethodName: OnShot
+      - m_Target: {fileID: 2595832345059723197}
+        m_TargetAssemblyTypeName: RecoilRotationSender, Assembly-CSharp
+        m_MethodName: SendRotation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -419,6 +427,34 @@ MonoBehaviour:
   hipfireRecoil: {x: -0.25, y: -0.2, z: 0.3}
   returnTime: 12
   snappines: 7
+--- !u!114 &5043302488638782024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675652631854040557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b851f9740dd23fb45b253c2527e96a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilRotationData: {fileID: 11400000, guid: 887083e9893f6474a882b038f6a457e2, type: 2}
+  OnRecoil:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RecoilRotationReceiver, Assembly-CSharp
+        m_MethodName: RotateObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2595832345059723197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,8 +467,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b851f9740dd23fb45b253c2527e96a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHipfireRecoil: {x: 70, y: 15, z: 5}
-  hipfireRecoil: {x: 60, y: -10, z: 40}
+  recoilRotationData: {fileID: 11400000, guid: c0a10135ab3f0794baf77a2b940eb592, type: 2}
+  OnRecoil:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5968075816158862432}
+        m_TargetAssemblyTypeName: RecoilRotationReceiver, Assembly-CSharp
+        m_MethodName: RotateObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5968075816158862432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675652631854040557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4de22375347d245b78c99905651549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   returnTime: 7
   snappines: 7
 --- !u!114 &1475987452985690432
@@ -450,7 +512,7 @@ MonoBehaviour:
   trailOrigin: {fileID: 9497843567788932}
   trailRendererPrefab: {fileID: 3902428475139715204, guid: bc2ae2a84962e124a8a0f52193ebdcc8,
     type: 3}
-  lineLifetime: 0.5
+  lineLifetime: 0.2
 --- !u!114 &3671574213965140765
 MonoBehaviour:
   m_ObjectHideFlags: 0

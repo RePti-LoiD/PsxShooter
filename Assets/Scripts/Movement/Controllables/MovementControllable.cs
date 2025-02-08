@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,8 +23,10 @@ public abstract class MovementControllable : MonoBehaviour
         get => isGrounded;  
         set
         {
+            if (isGrounded != value)
+                OnIsGroundedChanged.Invoke(value);
+            
             isGrounded = value;
-            OnIsGroundedChanged.Invoke(value);
         }
     }
     [Header("Events")][SerializeField] private BoolEvent OnIsGroundedChanged; 
@@ -37,7 +38,7 @@ public abstract class MovementControllable : MonoBehaviour
         set
         {
             horizontalSpeed = value;
-            OnHorizonalSpeedChanged.Invoke(value);
+            OnHorizonalSpeedChanged?.Invoke(value);
         }
     }
     [SerializeField] private UnityEvent<float> OnHorizonalSpeedChanged;

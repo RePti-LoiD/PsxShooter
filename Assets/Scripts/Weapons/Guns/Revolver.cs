@@ -29,6 +29,7 @@ public class Revolver : WeaponInputLayer
                         raycastPath.Add(x.transform.position);
 
                     x.StopAllCoroutines();
+                    Destroy(x.gameObject);
                 });
 
                 raycastPath.Add(FindAnyObjectByType<Target>().transform.position);
