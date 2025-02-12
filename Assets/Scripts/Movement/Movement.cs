@@ -14,7 +14,10 @@ public class Movement : MovementControllable
 
     [Header("Ground check")]
     [SerializeField] private float groundCheckRaycastLength;
+    
     private int currentJumpCount;
+    private int currentDashCount;
+    private float lastDashTime;
     private bool canJump = true;
 
     [Header("Jump")]

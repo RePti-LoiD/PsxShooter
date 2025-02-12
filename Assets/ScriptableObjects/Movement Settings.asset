@@ -25,6 +25,6 @@ MonoBehaviour:
   wallRunSpeed: 20
   dashSpeed: 15
   wallRunJumpAdditionalImpuls: {x: 15, y: 0}
-  jumpLandingCameraRotationEnabled: 0
-  keyboardLerpEnabled: 0
-  zTiltCameraEnabled: 0
+  jumpLandingCameraRotationEnabled: 1
+  keyboardLerpEnabled: 1
+  zTiltCameraEnabled: 1
