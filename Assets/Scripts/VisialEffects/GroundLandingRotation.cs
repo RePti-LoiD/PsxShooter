@@ -12,7 +12,6 @@ public class GroundLandingRotation : MonoBehaviour
 
     public void OnMovement(Vector2 input)
     {
-        print(input);
         this.input = input;
     }
 

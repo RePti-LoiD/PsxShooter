@@ -82,7 +82,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Reload"",
+                    ""name"": ""reload"",
                     ""type"": ""Button"",
                     ""id"": ""cc929ce4-02a5-45d4-af29-0b7d6a79b417"",
                     ""expectedControlType"": """",
@@ -100,7 +100,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Inspect"",
+                    ""name"": ""inspect"",
                     ""type"": ""Button"",
                     ""id"": ""94bd4d61-ac61-41d0-ad3d-7dc08a4c232d"",
                     ""expectedControlType"": """",
@@ -282,7 +282,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""Reload"",
+                    ""action"": ""reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -304,7 +304,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""Inspect"",
+                    ""action"": ""inspect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -349,9 +349,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_PlayerMap_Dash = m_PlayerMap.FindAction("Dash", throwIfNotFound: true);
         m_PlayerMap_Crouch = m_PlayerMap.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerMap_Shot = m_PlayerMap.FindAction("Shot", throwIfNotFound: true);
-        m_PlayerMap_Reload = m_PlayerMap.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerMap_Reload = m_PlayerMap.FindAction("reload", throwIfNotFound: true);
         m_PlayerMap_OnAdditionalAction = m_PlayerMap.FindAction("OnAdditionalAction", throwIfNotFound: true);
-        m_PlayerMap_Inspect = m_PlayerMap.FindAction("Inspect", throwIfNotFound: true);
+        m_PlayerMap_Inspect = m_PlayerMap.FindAction("inspect", throwIfNotFound: true);
     }
 
     ~@PlayerInputs()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,29 +7,43 @@ public class Movement : MovementControllable
 {
     [SerializeField] private UnityEvent OnMovementUpdate;
     [SerializeField] private Vector3Event OnLinearVelocityChanged;
+    [SerializeField] private DashEvent OnDashParametrized;
     [Space]
 
     [Header("Links")]
     [SerializeField] private MovementSettings movementSettings;
+    [SerializeField] private CoroutineQueue CoroutineQueue;
     private Rigidbody playerRb;
 
     [Header("Ground check")]
     [SerializeField] private float groundCheckRaycastLength;
-    
-    private int currentJumpCount;
-    private int currentDashCount;
-    private float lastDashTime;
-    private bool canJump = true;
 
     [Header("Jump")]
     [SerializeField] private float additionalImpulsFading;
 
+    private int currentJumpCount;
+    private int currentDashCount;
+
+    private bool canJump = true;
 
     private Vector3 additionalHorizontalImpuls;
     public float CurrentSpeed { get; protected set; }
 
     private Vector3 moveVector;
     private float currentLerpValue;
+
+    public int CurrentDashCount
+    {
+        get => currentDashCount; set
+        {
+            currentDashCount = value;
+            OnDashParametrized?.Invoke(new DashEventArgs
+            {
+                CurrentDashCount = currentDashCount,
+                TimeToRefill = movementSettings.DashTimeToRefill
+            });
+        }
+    }
 
     public void SetCurrentSpeed(float newSpeed)
     {
@@ -57,6 +72,11 @@ public class Movement : MovementControllable
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        CurrentDashCount = movementSettings.DashCount;
     }
 
     protected override void Update()
@@ -124,7 +144,20 @@ public class Movement : MovementControllable
 
     public override void OnDash()
     {
+        if (CurrentDashCount <= 0) return;       
+        CurrentDashCount--;
+
         additionalHorizontalImpuls = new Vector2(additionalHorizontalImpuls.x * movementSettings.DashSpeed, additionalHorizontalImpuls.y);
+
+        CoroutineQueue.AddCoroutineToQueue(RefillDash());
+    }
+
+    private IEnumerator RefillDash()
+    {
+        yield return new WaitForSeconds(movementSettings.DashTimeToRefill);
+        print("addddd");
+        if (CurrentDashCount < movementSettings.DashCount)
+            CurrentDashCount += 1;
     }
 
     public override void OnCrouch()

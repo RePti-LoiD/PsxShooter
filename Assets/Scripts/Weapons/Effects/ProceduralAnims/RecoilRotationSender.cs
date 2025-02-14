@@ -3,7 +3,7 @@ using UnityEngine;
 public class RecoilRotationSender : MonoBehaviour
 {
     [SerializeField] private RecoilRotationData recoilRotationData;
-    [SerializeField] private Vector3Event OnRecoil;
+    [SerializeField] public Vector3Event OnRecoil;
 
     public RecoilRotationData GetRecoilRotationData() =>
         recoilRotationData;

@@ -20,11 +20,12 @@ MonoBehaviour:
   additionalJumpImpuls: {x: 5, y: 0}
   jumpCount: 2
   dashCount: 3
+  dashTimeToRefill: 2
   crouchSpeed: 2
   onFlyCrouchVelocitySpeed: 25
   wallRunSpeed: 20
-  dashSpeed: 15
+  dashSpeed: 12
   wallRunJumpAdditionalImpuls: {x: 15, y: 0}
   jumpLandingCameraRotationEnabled: 1
   keyboardLerpEnabled: 1
-  zTiltCameraEnabled: 1
+  zTiltCameraEnabled: 0

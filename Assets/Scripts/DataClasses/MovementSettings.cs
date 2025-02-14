@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Create movement settings asset")]
+[CreateAssetMenu(fileName = "Create movement settings asset", menuName = "Scriptable Objects/MovementSettings")]
 class MovementSettings : ScriptableObject
 {
     [Header("Input")]
@@ -16,8 +16,9 @@ class MovementSettings : ScriptableObject
     [SerializeField] private float defaultSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private Vector2 additionalJumpImpuls;
-    [SerializeField] private float jumpCount;
-    [SerializeField] private float dashCount;
+    [SerializeField] private int jumpCount;
+    [SerializeField] private int dashCount;
+    [SerializeField] private int dashTimeToRefill;
 
     [Header("Crouch")]
     [SerializeField] private float crouchSpeed;
@@ -44,8 +45,9 @@ class MovementSettings : ScriptableObject
     public float DashSpeed { get => dashSpeed; set => dashSpeed = value; }
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public Vector2 AdditionalJumpImpuls { get => additionalJumpImpuls; set => additionalJumpImpuls = value; }
-    public float JumpCount { get => jumpCount; set => jumpCount = value; }
-    public float DashCount { get => dashCount; set => dashCount = value; }
+    public int JumpCount { get => jumpCount; set => jumpCount = value; }
+    public int DashCount { get => dashCount; set => dashCount = value; }
+    public int DashTimeToRefill { get => dashTimeToRefill; set => dashTimeToRefill = value; }
 
 
     public float OnFlyCrouchVelocitySpeed { get => onFlyCrouchVelocitySpeed; set => onFlyCrouchVelocitySpeed = value; }

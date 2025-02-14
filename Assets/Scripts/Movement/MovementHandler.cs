@@ -5,21 +5,21 @@ using UnityEngine.InputSystem;
 public class MovementHandler : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private UnityEvent OnJump;
-    [SerializeField] private UnityEvent OnDash;
-    [SerializeField] private UnityEvent OnCrouch;
+    [SerializeField] public UnityEvent OnJump;
+    [SerializeField] public UnityEvent OnDash;
+    [SerializeField] public UnityEvent OnCrouch;
 
     [Header("Mouse")]
-    [SerializeField] private Vector2Event OnMouseMove;
-    [SerializeField] private Vector2Event OnMove;
+    [SerializeField] public Vector2Event OnMouseMove;
+    [SerializeField] public Vector2Event OnMove;
 
     [Header("Gun")]
-    [SerializeField] private UnityEvent OnShotStart;
-    [SerializeField] private UnityEvent OnShotStop;
+    [SerializeField] public UnityEvent OnShotStart;
+    [SerializeField] public UnityEvent OnShotStop;
 
-    [SerializeField] private UnityEvent OnReload;
-    [SerializeField] private UnityEvent OnAdditionalAction;
-    [SerializeField] private UnityEvent OnInspect;
+    [SerializeField] public UnityEvent OnReload;
+    [SerializeField] public UnityEvent OnAdditionalAction;
+    [SerializeField] public UnityEvent OnInspect;
 
     private PlayerInputs inputs;
 

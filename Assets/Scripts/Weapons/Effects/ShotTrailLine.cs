@@ -8,6 +8,9 @@ public class ShotTrailLine : MonoBehaviour
     [SerializeField] private GameObject trailRendererPrefab;
     [SerializeField] private float lineLifetime;
 
+    [Space]
+    [SerializeField] private MonoBehaviour coroutineTarget;
+
     public void DrawTrail(Vector3[] trailTarget)
     {
         var trailObj = Instantiate(trailRendererPrefab, Vector3.zero, Quaternion.identity, null);
@@ -16,7 +19,7 @@ public class ShotTrailLine : MonoBehaviour
          
         line.SetPositions(new Vector3[] { trailOrigin.position }.Concat(trailTarget).ToArray());
 
-        StartCoroutine(DestroyLineAfter(trailObj, lineLifetime));
+        coroutineTarget.StartCoroutine(DestroyLineAfter(trailObj, lineLifetime));
     }
 
     private IEnumerator DestroyLineAfter(GameObject obj, float time)

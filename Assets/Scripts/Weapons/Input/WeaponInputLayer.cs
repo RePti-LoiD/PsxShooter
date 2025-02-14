@@ -22,7 +22,7 @@ public class WeaponInputLayer : MonoBehaviour
 
     public virtual void OnReload()
     {
-        print("Reload");
+        print("reload");
     }
 
     public virtual void OnAdditionalAction()
@@ -32,6 +32,6 @@ public class WeaponInputLayer : MonoBehaviour
 
     public virtual void OnInspect()
     {
-        print("Inspect");
+        print("inspect");
     }
 }

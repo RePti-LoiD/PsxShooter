@@ -3,7 +3,7 @@ using UnityEngine;
 public class SoundPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips;
-    [SerializeField] private AudioSource source;
+    [SerializeField] public AudioSource Source;
 
     public void PlaySound()
     {
@@ -12,6 +12,6 @@ public class SoundPlayer : MonoBehaviour
 
     public void PlaySound(int index)
     {
-        source.PlayOneShot(clips[index]);
+        Source.PlayOneShot(clips[index]);
     }
 }
