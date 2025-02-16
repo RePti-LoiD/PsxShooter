@@ -155,7 +155,7 @@ public class Movement : MovementControllable
     private IEnumerator RefillDash()
     {
         yield return new WaitForSeconds(movementSettings.DashTimeToRefill);
-        print("addddd");
+
         if (CurrentDashCount < movementSettings.DashCount)
             CurrentDashCount += 1;
     }

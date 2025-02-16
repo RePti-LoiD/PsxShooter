@@ -17,9 +17,14 @@ public class MovementHandler : MonoBehaviour
     [SerializeField] public UnityEvent OnShotStart;
     [SerializeField] public UnityEvent OnShotStop;
 
+    [Space]
     [SerializeField] public UnityEvent OnReload;
     [SerializeField] public UnityEvent OnAdditionalAction;
     [SerializeField] public UnityEvent OnInspect;
+
+    [Space]
+    [SerializeField] public UnityEvent LastSelect;
+    [SerializeField] public UnityEvent<int> IndexSelected;
 
     private PlayerInputs inputs;
 
@@ -43,6 +48,9 @@ public class MovementHandler : MonoBehaviour
         inputs.PlayerMap.Reload.performed += ReloadHandler;
         inputs.PlayerMap.Inspect.performed += InspectHandler;
         inputs.PlayerMap.OnAdditionalAction.performed += AdditionalActionHandler;
+        inputs.PlayerMap.PrevSelection.performed += OnPrevSelection;
+
+        inputs.PlayerMap.WeaponSelection.performed += OnWeaponSelection;
 
         isInputEnabled = true;
     }
@@ -60,6 +68,9 @@ public class MovementHandler : MonoBehaviour
         inputs.PlayerMap.Reload.performed -= ReloadHandler;
         inputs.PlayerMap.Inspect.performed -= InspectHandler;
         inputs.PlayerMap.OnAdditionalAction.performed -= AdditionalActionHandler;
+        inputs.PlayerMap.PrevSelection.performed -= OnPrevSelection;
+
+        inputs.PlayerMap.WeaponSelection.performed -= OnWeaponSelection;
 
         isInputEnabled = false;
     }
@@ -107,5 +118,11 @@ public class MovementHandler : MonoBehaviour
 
     private void AdditionalActionHandler(InputAction.CallbackContext obj) =>
         OnAdditionalAction?.Invoke();
+
+    private void OnWeaponSelection(InputAction.CallbackContext obj) =>
+        IndexSelected?.Invoke(int.Parse(obj.control.name) - 1);
+
+    private void OnPrevSelection(InputAction.CallbackContext obj) =>
+        LastSelect?.Invoke();
     #endregion
 }

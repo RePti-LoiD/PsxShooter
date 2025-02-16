@@ -22,7 +22,7 @@ MonoBehaviour:
   dashCount: 3
   dashTimeToRefill: 2
   crouchSpeed: 2
-  onFlyCrouchVelocitySpeed: 25
+  onFlyCrouchVelocitySpeed: 35
   wallRunSpeed: 20
   dashSpeed: 12
   wallRunJumpAdditionalImpuls: {x: 15, y: 0}

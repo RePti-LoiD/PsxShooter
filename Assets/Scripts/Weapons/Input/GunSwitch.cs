@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class GunSwitch : MonoBehaviour
     [SerializeField] private List<GunAPI> guns = new List<GunAPI>();
     [SerializeField] private GunAPIEvent GunSelected;
 
+    [Space]
+    [SerializeField] private float gunSwitchDelay;
+
     [Header("Data for gun")]
     [SerializeField] private MonoBehaviour coroutineRunner;
     [SerializeField] private AudioSource audioSource;
@@ -15,7 +19,11 @@ public class GunSwitch : MonoBehaviour
     [SerializeField] private RecoilRotationReceiver cameraRecoilRotationReceiver;
 
     private GunAPI currentGun;
+    private GunAPI prevGun;
 
+    private bool canSwitchGun = true;
+
+    private int currentIndex = 0;
     public int CurrentIndex 
     { 
         private set
@@ -24,23 +32,29 @@ public class GunSwitch : MonoBehaviour
         }
         get => Mathf.Abs(currentIndex) % 4;
     }
-    private int currentIndex = 0;
 
     private void Start()
     {
         SelectGun(guns.First());
     }
 
-    private void Update()
+    public void SwitchToPrevious()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            SelectGun(guns.First());
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            SelectGun(guns.Last());
+        if (prevGun == null) return;
+
+        SelectGun(prevGun);
     }
 
-    private void SelectGun(GunAPI gun)
+    public void SelectGun(int index)
     {
+        SelectGun(guns[index]);
+    }
+
+    public void SelectGun(GunAPI gun)
+    {
+        if (!canSwitchGun) return;
+        if (currentGun == gun) return;
+        
         currentGun?.DisableGun();
 
         gun.EnableGun(new ExternalDataForGun
@@ -51,8 +65,19 @@ public class GunSwitch : MonoBehaviour
             CameraRecoilRotationReceiver = cameraRecoilRotationReceiver
         });
         
+        prevGun = currentGun;
         currentGun = gun;
 
         GunSelected?.Invoke(gun);
+
+        canSwitchGun = false;
+        StartCoroutine(GunSwitchDelay(gunSwitchDelay));
+    }
+
+    private IEnumerator GunSwitchDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        canSwitchGun = true;
     }
 }

@@ -26,7 +26,7 @@ public class CoinThrower : MonoBehaviour
 
         var coinRb = coin.GetComponent<Rigidbody>();
         coinRb.linearVelocity = linearVelocity * coinlinearVeloityMultiplier;
-        coinRb.AddForce(transform.position + (-transform.forward + transform.up) * coinAddForceMultiplier, ForceMode.Acceleration);
+        coinRb.AddForce((-transform.forward + transform.up) * coinAddForceMultiplier, ForceMode.Acceleration);
 
         coroutineTarget.StartCoroutine(DestroyCoinAfter(coin, coinLifetime));
     }

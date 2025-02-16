@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class GunAPI : MonoBehaviour
 {
+    [SerializeField] public GunIkAPI ArmsIkAPI;
+
     public abstract void ShotStart();
     public abstract void ShotStop();
     public abstract void Reload();
