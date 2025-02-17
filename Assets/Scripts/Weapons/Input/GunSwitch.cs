@@ -13,6 +13,7 @@ public class GunSwitch : MonoBehaviour
     [SerializeField] private float gunSwitchDelay;
 
     [Header("Data for gun")]
+    [SerializeField] private Movement movement;
     [SerializeField] private MonoBehaviour coroutineRunner;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Transform gunTransform;
@@ -59,6 +60,7 @@ public class GunSwitch : MonoBehaviour
 
         gun.EnableGun(new ExternalDataForGun
         {
+            Movement = movement,
             CoroutineRunner = coroutineRunner,
             AudioSource = audioSource,
             GunTransform = gunTransform,

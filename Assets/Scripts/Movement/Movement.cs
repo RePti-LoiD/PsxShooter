@@ -20,13 +20,16 @@ public class Movement : MovementControllable
 
     [Header("Jump")]
     [SerializeField] private float additionalImpulsFading;
+    [SerializeField] private float additionalLinearVelocityFading;
 
     private int currentJumpCount;
     private int currentDashCount;
 
     private bool canJump = true;
 
-    private Vector3 additionalHorizontalImpuls;
+    private float additionalHorizontalImpuls;
+    private Vector3 additionalLinearVelocity;
+
     public float CurrentSpeed { get; protected set; }
 
     private Vector3 moveVector;
@@ -37,12 +40,28 @@ public class Movement : MovementControllable
         get => currentDashCount; set
         {
             currentDashCount = value;
+
             OnDashParametrized?.Invoke(new DashEventArgs
             {
                 CurrentDashCount = currentDashCount,
                 TimeToRefill = movementSettings.DashTimeToRefill
             });
         }
+    }
+
+    public void ZeroMoveVector()
+    {
+        moveVector = Vector3.zero;
+    }
+
+    public void ZeroLinearVelocity()
+    {
+        playerRb.linearVelocity = Vector3.zero;
+    }
+
+    public void AddLinearVelocity(Vector3 velocity)
+    {
+        additionalLinearVelocity += velocity;
     }
 
     public void SetCurrentSpeed(float newSpeed)
@@ -66,7 +85,7 @@ public class Movement : MovementControllable
         currentJumpCount = newJumpCount;
     }
 
-    public void SetAdditionalHorizonalImpulse(Vector3 newHorizonalImpluls) =>
+    public void SetAdditionalHorizonalImpulse(float newHorizonalImpluls) =>
         additionalHorizontalImpuls = newHorizonalImpluls;
 
     private void Awake()
@@ -84,6 +103,7 @@ public class Movement : MovementControllable
         base.Update();
 
         AdditionalImpulseFading();
+        AdditionalLinearVelocityFading();
 
         CurrentSpeed = movementSettings.DefaultSpeed;
         
@@ -98,7 +118,10 @@ public class Movement : MovementControllable
         Mathf.Sqrt(Mathf.Pow(playerRb.linearVelocity.x, 2) + Mathf.Pow(playerRb.linearVelocity.z, 2));
 
     private void AdditionalImpulseFading() =>
-        additionalHorizontalImpuls = Vector2.Lerp(additionalHorizontalImpuls, new Vector2(1, 0), additionalImpulsFading * Time.deltaTime);
+        additionalHorizontalImpuls = Mathf.Lerp(additionalHorizontalImpuls, 1, additionalImpulsFading * Time.deltaTime);
+
+    private void AdditionalLinearVelocityFading() =>
+        additionalLinearVelocity = Vector3.Lerp(additionalLinearVelocity, Vector3.zero, additionalLinearVelocityFading * Time.deltaTime);
 
     private void HandleGroundCheck()
     {
@@ -123,12 +146,17 @@ public class Movement : MovementControllable
 
         if (!canJump) return;
 
-        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, movementSettings.JumpForce, playerRb.linearVelocity.z);
+        SetJumpVelocity(movementSettings.JumpForce);
         CurrentDirection = new Vector3(CurrentDirection.x, movementSettings.JumpForce, CurrentDirection.z);
 
-        additionalHorizontalImpuls = movementSettings.AdditionalJumpImpuls;
+        additionalHorizontalImpuls = movementSettings.AdditionalJumpImpuls.x;
     }
-    
+
+    public void SetJumpVelocity(float jumpForce)
+    {
+        playerRb.linearVelocity = new Vector3(playerRb.linearVelocity.x, jumpForce, playerRb.linearVelocity.z);
+    }
+
     public override void OnMove(Vector2 inputs)
     {
         var transformedInput = transform.TransformDirection(new Vector3(inputs.x, 0, inputs.y)) * CurrentSpeed;
@@ -138,7 +166,7 @@ public class Movement : MovementControllable
         else 
             moveVector = transformedInput;
 
-        playerRb.linearVelocity = new Vector3(moveVector.x * additionalHorizontalImpuls.x, playerRb.linearVelocity.y, moveVector.z * additionalHorizontalImpuls.x);
+        playerRb.linearVelocity = new Vector3(moveVector.x * additionalHorizontalImpuls, playerRb.linearVelocity.y, moveVector.z * additionalHorizontalImpuls) + additionalLinearVelocity;
         CurrentDirection = new Vector3(inputs.x, CurrentDirection.y, inputs.y);
     }
 
@@ -147,7 +175,7 @@ public class Movement : MovementControllable
         if (CurrentDashCount <= 0) return;       
         CurrentDashCount--;
 
-        additionalHorizontalImpuls = new Vector2(additionalHorizontalImpuls.x * movementSettings.DashSpeed, additionalHorizontalImpuls.y);
+        additionalHorizontalImpuls = additionalHorizontalImpuls * movementSettings.DashSpeed;
 
         CoroutineQueue.AddCoroutineToQueue(RefillDash());
     }

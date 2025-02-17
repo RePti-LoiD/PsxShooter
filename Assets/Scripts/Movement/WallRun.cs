@@ -73,6 +73,6 @@ public class WallRun : MonoBehaviour
     {
         if (!IsWallRun) return;
 
-        movement.SetAdditionalHorizonalImpulse(new Vector2(movementSettings.WallRunJumpAdditionalImpuls.x, movementSettings.WallRunJumpAdditionalImpuls.y));
+        movement.SetAdditionalHorizonalImpulse(movementSettings.WallRunJumpAdditionalImpuls.x);
     }
 }

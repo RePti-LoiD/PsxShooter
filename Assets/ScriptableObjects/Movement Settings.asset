@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Movement Settings
   m_EditorClassIdentifier: 
   groundKeyboardLerpValue: 10
-  airKeyboardLerpValue: 2
+  airKeyboardLerpValue: 4
   sensitivity: 0.05
   defaultSpeed: 12
   jumpForce: 7
   additionalJumpImpuls: {x: 5, y: 0}
-  jumpCount: 2
+  jumpCount: 1
   dashCount: 3
   dashTimeToRefill: 2
   crouchSpeed: 2
   onFlyCrouchVelocitySpeed: 35
   wallRunSpeed: 20
   dashSpeed: 12
-  wallRunJumpAdditionalImpuls: {x: 15, y: 0}
+  wallRunJumpAdditionalImpuls: {x: 5, y: 0}
   jumpLandingCameraRotationEnabled: 1
   keyboardLerpEnabled: 1
   zTiltCameraEnabled: 0

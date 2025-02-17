@@ -4,12 +4,12 @@ public class WeaponInputLayer : MonoBehaviour
 {
     [SerializeField] private ShotType shotType;
 
-    public void OnShotStart()
+    public virtual void OnShotStart()
     {
         shotType.OnShotStart();
     }
 
-    public void OnShotStop()
+    public virtual void OnShotStop()
     {
         shotType.OnShotStop();
     }
@@ -17,21 +17,21 @@ public class WeaponInputLayer : MonoBehaviour
 
     public virtual void OnShot()
     {
-        print("Shot");
+
     }
 
     public virtual void OnReload()
     {
-        print("reload");
+
     }
 
     public virtual void OnAdditionalAction()
     {
-        print("Additional action");
+
     }
 
     public virtual void OnInspect()
     {
-        print("inspect");
+
     }
 }

@@ -1,29 +1,45 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class Revolver : WeaponInputLayer
+public class Railgun : WeaponInputLayer
 {
     [SerializeField] private float damage;
-    [SerializeField] private float minRicochetAngle;
     [SerializeField] private Vector3ArrayEvent OnShotTargetTransform;
+    [SerializeField] private RailgunAPI railgunAPI;
+
+    [SerializeField] private Vector2 positionalRecoilClamp;
+    [SerializeField] private float jumpVelocityMultiplier;
 
     private Transform raycastOrigin;
+
+    private float currentDamage;
 
     private void Start()
     {
         raycastOrigin = Camera.main.transform;
     }
 
-    public override void OnShot()
-    {        
+    public void OnShot(float time)
+    {
+        currentDamage = time * damage;
+
+        railgunAPI.AddMovementAdditionalVelocity (
+            time * new Vector3 
+            (
+                -raycastOrigin.transform.forward.x * positionalRecoilClamp.x, 0,
+                -raycastOrigin.transform.forward.z * positionalRecoilClamp.y
+            )
+        );
+        railgunAPI.SetJumpVelocity(time * jumpVelocityMultiplier);
+
         if (Physics.Raycast(raycastOrigin.position, raycastOrigin.forward, out RaycastHit hitInfo))
         {
             var raycastPath = new List<Vector3>() { hitInfo.point };
 
             if (hitInfo.transform.gameObject.TryGetComponent(out Coin currentCoin))
             {
-                FindObjectsByType<Coin>(FindObjectsSortMode.None).ToList().ForEach(x => 
+                FindObjectsByType<Coin>(FindObjectsSortMode.None).ToList().ForEach(x =>
                 {
                     if (x != currentCoin)
                         raycastPath.Add(x.transform.position);
@@ -33,14 +49,6 @@ public class Revolver : WeaponInputLayer
                 });
 
                 raycastPath.Add(FindAnyObjectByType<Target>().transform.position);
-            }
-            else
-            {
-                var reflect = hitInfo.point + Vector3.Reflect(raycastOrigin.forward, hitInfo.normal) * 100;
-                float angle = Vector3.Angle(raycastOrigin.forward, reflect);
-
-                if (angle < minRicochetAngle)
-                    raycastPath.Add(reflect);
             }
 
             OnShotTargetTransform?.Invoke(raycastPath.ToArray());

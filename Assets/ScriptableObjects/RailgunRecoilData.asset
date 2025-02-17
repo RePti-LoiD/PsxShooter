@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6bc201a849489e469c84845b78bed78, type: 3}
   m_Name: RailgunRecoilData
   m_EditorClassIdentifier: 
-  rotation: {x: 10, y: 15, z: 15}
-  targetRotation: {x: 10, y: 15, z: 15}
-  returnTime: 3
-  snappines: 5
+  rotation: {x: -50, y: -15, z: 20}
+  targetRotation: {x: -50, y: -15, z: 20}
+  returnTime: 7
+  snappines: 7
