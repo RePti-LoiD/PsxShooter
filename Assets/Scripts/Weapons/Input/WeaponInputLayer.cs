@@ -2,16 +2,14 @@ using UnityEngine;
 
 public class WeaponInputLayer : MonoBehaviour
 {
-    [SerializeField] private ShotType shotType;
-
     public virtual void OnShotStart()
     {
-        shotType.OnShotStart();
+
     }
 
     public virtual void OnShotStop()
     {
-        shotType.OnShotStop();
+
     }
 
 

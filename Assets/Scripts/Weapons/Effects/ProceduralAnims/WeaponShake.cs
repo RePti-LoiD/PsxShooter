@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class WeaponShake : MonoBehaviour
@@ -8,12 +10,20 @@ public class WeaponShake : MonoBehaviour
     [SerializeField] private float mouseInputWeight;
     [SerializeField] private float lerpValue;
 
+    [Space]
+    [SerializeField] private float returnSpeed;
+
     private float time;
     private float Cos { get => Mathf.Abs(Mathf.Cos(shakeFreq * time)) * shakeAmount; }
     private float Sin { get => Mathf.Sin(shakeFreq * time) * shakeAmount; }
 
     private Vector2 mouseInput;
     private bool isGrounded;
+
+    private void Update()
+    {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * returnSpeed);
+    }
 
     public void OnIsGroundedChanged(bool isGrounded)
     {
@@ -47,5 +57,4 @@ public class WeaponShake : MonoBehaviour
                     Time.deltaTime * lerpValue
                 );
     }
-
 }

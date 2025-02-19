@@ -4,6 +4,8 @@ public class RailgunAPI : BaseGunAPI
 {
     [SerializeField] private RecoilRotationSender RecoilRotationSender;
 
+    [SerializeField] private LinearInterpolationAnim lerpAnim;
+
     public void SetJumpVelocity(float jumpVelocity)
     {
         LastData.Movement.SetJumpVelocity(jumpVelocity);
@@ -18,6 +20,8 @@ public class RailgunAPI : BaseGunAPI
     {
         base.EnableGun(data);
 
+        lerpAnim.AnimateGunEnabling();
+
         RecoilRotationSender.OnRecoil.AddListener(LastData.CameraRecoilRotationReceiver.RotateObject);
     }
 
@@ -25,6 +29,6 @@ public class RailgunAPI : BaseGunAPI
     {
         RecoilRotationSender.OnRecoil.RemoveListener(LastData.CameraRecoilRotationReceiver.RotateObject);
 
-        base.DisableGun();
+        lerpAnim.AnimateGunDisabling(() => base.DisableGun());
     }
 }

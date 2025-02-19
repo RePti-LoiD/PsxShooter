@@ -25,6 +25,8 @@ public class HoldSingleShotType : ShotType
 
     public override void OnShotStop()
     {
+        if (!currentlyShot) return;
+
         currentlyShot = false;
 
         var currentHoldTime = Time.time - lastShotTime;

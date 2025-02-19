@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +13,12 @@ public class LinearInterpolationAnim : MonoBehaviour
         StartCoroutine(MoveObject(startPosition, targetPosition, animTime));
     }
 
-    private IEnumerator MoveObject(Vector3 startPosition, Vector3 targetPosition, float time)
+    public void AnimateGunDisabling(Action onDisabled = null)
+    {
+        StartCoroutine(MoveObject(targetPosition, startPosition, animTime, onDisabled));
+    }
+
+    private IEnumerator MoveObject(Vector3 startPosition, Vector3 targetPosition, float time, Action onEndAnimation = null)
     {
         float currentTime = 0;
 
@@ -23,5 +29,7 @@ public class LinearInterpolationAnim : MonoBehaviour
 
             yield return null;
         }
+
+        onEndAnimation?.Invoke();
     }
 }
