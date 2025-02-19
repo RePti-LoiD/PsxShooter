@@ -23,8 +23,8 @@ public class RailgunAPI : BaseGunAPI
 
     public override void DisableGun()
     {
-        base.DisableGun();
-
         RecoilRotationSender.OnRecoil.RemoveListener(LastData.CameraRecoilRotationReceiver.RotateObject);
+
+        base.DisableGun();
     }
 }

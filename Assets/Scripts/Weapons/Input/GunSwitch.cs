@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ public class GunSwitch : MonoBehaviour
     [Space]
     [SerializeField] private float gunSwitchDelay;
 
-    [Header("Data for gun")]
+    [Header("Data for oldGun")]
     [SerializeField] private Movement movement;
     [SerializeField] private MonoBehaviour coroutineRunner;
     [SerializeField] private AudioSource audioSource;
@@ -55,9 +56,25 @@ public class GunSwitch : MonoBehaviour
     {
         if (!canSwitchGun) return;
         if (currentGun == gun) return;
-        
-        currentGun?.DisableGun();
 
+        if (currentGun != null)
+        {
+            currentGun.Disabled += (oldGun) =>
+            {
+                ActivateGun(gun);
+                currentGun.Disabled = null;
+            };
+
+            currentGun.DisableGun();
+        }
+        else
+        {
+            ActivateGun(gun);
+        }
+    }
+
+    private void ActivateGun(GunAPI gun)
+    {
         gun.EnableGun(new ExternalDataForGun
         {
             Movement = movement,
@@ -66,7 +83,7 @@ public class GunSwitch : MonoBehaviour
             GunTransform = gunTransform,
             CameraRecoilRotationReceiver = cameraRecoilRotationReceiver
         });
-        
+
         prevGun = currentGun;
         currentGun = gun;
 

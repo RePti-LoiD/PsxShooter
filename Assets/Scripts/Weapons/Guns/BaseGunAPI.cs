@@ -13,16 +13,17 @@ public class BaseGunAPI : GunAPI
     [SerializeField] private UnityEvent reload;
     
     [Space]
-    [SerializeField] private UnityEvent gunEnabled;
-    [SerializeField] private UnityEvent gunDisabled;
+    [SerializeField] public UnityEvent gunEnabled;
+    [SerializeField] public UnityEvent gunDisabled;
 
     protected ExternalDataForGun LastData;
 
     public override void DisableGun()
     {
         gunDisabled?.Invoke();
-
         children.SetActive(false);
+
+        base.DisableGun();
     }
 
     public override void EnableGun(ExternalDataForGun data)

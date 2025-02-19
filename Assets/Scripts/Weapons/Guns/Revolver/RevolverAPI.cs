@@ -7,10 +7,10 @@ public class RevolverAPI : BaseGunAPI
 
     public override void DisableGun()
     {
-        base.DisableGun();
-
         soundPlayer.Source = null;
         cameraRecoil.OnRecoil.RemoveListener(LastData.CameraRecoilRotationReceiver.RotateObject);
+
+        base.DisableGun();
     }
 
     public override void EnableGun(ExternalDataForGun data)

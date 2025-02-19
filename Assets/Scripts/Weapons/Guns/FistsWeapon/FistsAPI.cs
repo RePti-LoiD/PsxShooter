@@ -5,12 +5,14 @@ public class FistsAPI : BaseGunAPI
     [SerializeField] public RecoilRotationSender leftHitRotationSender;
     [SerializeField] public RecoilRotationSender rightHitRotationSender;
 
+    [SerializeField] private LinearInterpolationAnim lerpAnim;
+
     public override void DisableGun()
     {
-        base.DisableGun();
-
         leftHitRotationSender.OnRecoil.RemoveListener(LastData.CameraRecoilRotationReceiver.RotateObject);
         rightHitRotationSender.OnRecoil.RemoveListener(LastData.CameraRecoilRotationReceiver.RotateObject);
+
+        base.DisableGun();
     }
 
     public override void EnableGun(ExternalDataForGun data)

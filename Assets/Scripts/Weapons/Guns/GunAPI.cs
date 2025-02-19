@@ -15,5 +15,6 @@ public abstract class GunAPI : MonoBehaviour
 
     public abstract void EnableGun(ExternalDataForGun data);
 
-    public abstract void DisableGun();
+    public virtual void DisableGun() =>
+        Disabled?.Invoke(this);
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GunEnableAnim : MonoBehaviour
+public class LinearInterpolationAnim : MonoBehaviour
 {
     [SerializeField] private Vector3 startPosition;
     [SerializeField] private Vector3 targetPosition;
