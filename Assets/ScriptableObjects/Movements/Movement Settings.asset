@@ -28,4 +28,4 @@ MonoBehaviour:
   wallRunJumpAdditionalImpuls: {x: 5, y: 0}
   jumpLandingCameraRotationEnabled: 1
   keyboardLerpEnabled: 1
-  zTiltCameraEnabled: 0
+  zTiltCameraEnabled: 1
